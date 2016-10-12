@@ -1,1 +1,1 @@
-angular.module('myApp', [])
+angular.module('myApp', [require('angular-animate')])
