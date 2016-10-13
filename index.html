@@ -8,18 +8,27 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body>
-    <form id="search">
+<body ng-controller="myCtrl as main">
+    <form id="search" ng-submit="main.submitForm()">
         <div id="start">
             <h1>Flickr Searcher</h1>
-            <input type="text" placeholder="enter a tag to search for">
+            <input type="text" placeholder="enter a tag to search for" ng-model="main.tag" ng-min="1" ng-max="20" required>
             <input type="submit" name="submit" value="Search!">
+            <button class="reset" ng-click="main.reset()">Start Over</button>
         </div>
     </form>
-    <div id="results">
-    	
+    <div id="message" ng-show>
+    	<!-- searching for {{main.tag}} -->
     </div>
-
+    <div id="results">
+        <div class="photos" ng-show>
+            <!--How many imgs found, photos-->
+        </div>
+        <div class="error" ng-show>
+            <!-- no img found -->
+            <!-- flickr api error msg -->
+        </div>
+    </div>
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"></script>
     <script type="text/javascript" src="app.js"></script>
