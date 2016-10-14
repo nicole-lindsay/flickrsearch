@@ -17,14 +17,14 @@
         </form>
     </div>
     <div id="messages">
-        <p ng-if="valid && !results && !error">Looking for pictures with the {{main.tag}} tag</p>
-        <p ng-if="error && !valid">No pictures with the {{main.tag}} tag found :(</p>
-        <p ng-if="valid && error">Uh oh, seems there's a problem with the API!</p>
+        <p ng-if="main.valid && !results && !main.error">Looking for pictures with the {{main.tag}} tag</p>
+        <p ng-if="main.error && !main.valid">No pictures with the {{main.tag}} tag found :(</p>
+        <p ng-if="main.valid && main.error">Uh oh, seems there's a problem with the API!</p>
     </div>
     <div id="results" ng-if="main.results">
         <div class="photos" ng-repeat="result in results">
             <p ng-if="valid && results">There are {{result.total}} results for {{main.tag}}</p>
-            <img ng-src="https://farm{{result.farm}}.staticflickr.com/{{result.server}}/{{result.id}}_{{result.secret}}.jpg">
+            <img ng-src="https://farm{{result.farm}}.staticflickr.com/{{result.server}}/{{result.id}}_{{result.secret}}_m.jpg">
         </div>
     </div>
     <script src="node_modules/jquery/dist/jquery.js"></script>
