@@ -6,26 +6,31 @@
     <title>Flickr Search</title>
     <link rel="stylesheet" type="text/css" href="node_modules/normalize.css/normalize.css">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
 </head>
 
 <body ng-controller="myCtrl as main">
     <div id="start">
         <form id="search" name="myForm" ng-submit="main.searchPhoto(main.tag)">
             <h1>Flickr Searcher</h1>
-            <input type="text" placeholder="enter a tag to search for" ng-model="main.tag" required>
-            <input type="submit" value="Search!">
+            <input type="text" class="picsearch" id="text" placeholder="enter a tag to search for" ng-model="main.tag" required>
+            <input type="submit" class="picsearch" id="button" value="Search!">
         </form>
     </div>
     <div id="messages">
         <p ng-if="myForm.$submitted && !main.foundPhotos">Looking for pictures with the {{main.tag}} tag</p>
-        <p ng-if="myForm.$submitted && main.foundPhotos && !main.error">There are {{main.results.total}} results for {{main.tag}}</p>
+        <p ng-if="myForm.$submitted && main.foundPhotos && !main.error">There are {{main.results.total}} results for {{main.placeholder}} <br>
+        Page: {{main.results.page}}</p>
         <p ng-if="main.valid && main.error">Uh oh, seems there's a problem with the API!</p>
     </div>
-
     <div id="results" ng-if="main.results">
         <div class="photos" ng-repeat="result in main.results.photo">
             <img ng-src="https://farm{{result.farm}}.staticflickr.com/{{result.server}}/{{result.id}}_{{result.secret}}_q.jpg">
         </div>
+    </div>
+    <div id="pageButtons" ng-if="myForm.$submitted && main.foundPhotos && !main.error">
+    	<button id="prev" ng-click="main.back()" ng-if="main.results.page > 1">Back</button>
+    	<button id="next" ng-click="main.forward()" ng-if="main.results.page < main.results.pages">Next</button>
     </div>
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/angular/angular.js"></script>

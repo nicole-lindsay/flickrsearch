@@ -1,0 +1,32 @@
+body, .picsearch, #prev, #next {
+	font-family: 'Handlee', cursive;
+}
+
+h1 {
+	font-size: 4em;
+}
+
+.picsearch {
+	line-height: 2em;
+}
+
+#text {
+	width: 20em;
+}
+
+#button {
+	width: 5em;
+}
+
+#start, #messages, #pageButtons {
+	text-align: center;
+}
+
+#results {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-left: 15em;
+	margin-right: 15em;
+}
