@@ -7,7 +7,6 @@ angular.module('myApp', ['ngAnimate'])
         main.error = false;
         main.foundPhotos = false;
         main.results = [];
-        main.results.page = 1;
 
         main.getPhoto = function() {
             var url = "https://api.flickr.com/services/rest";
@@ -16,7 +15,6 @@ angular.module('myApp', ['ngAnimate'])
                 api_key: '86ea026a9ba3960e6eb98657b7ea5cb9',
                 tags: main.tag,
                 format: 'json',
-                page: main.results.page,
                 nojsoncallback: 1
             };
 
@@ -32,6 +30,7 @@ angular.module('myApp', ['ngAnimate'])
                         var placeholder = main.tag;
                         main.tag = "";
                         main.placeholder = placeholder;
+                        main.results.page = 1;
                     },
                     function(response) {
                         main.error = true;
