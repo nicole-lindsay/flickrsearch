@@ -4,6 +4,8 @@ angular.module('myApp', ['ngAnimate'])
         main.tag = "";
         main.valid = false;
         main.error = false;
+        main.foundPhotos = false;
+        main.results = [];
 
         main.getPhoto = function() {
             var url = "https://api.flickr.com/services/rest";
@@ -21,9 +23,10 @@ angular.module('myApp', ['ngAnimate'])
             	params: params
             })
             .then(function(response){
+            	main.foundPhotos = true;
             	main.results = response.data.photos;
             	main.error = false;
-            	console.log(main.results);
+            	// console.log(main.results); //works here
             },
             function(response){
             	main.error = true;
@@ -39,7 +42,6 @@ angular.module('myApp', ['ngAnimate'])
         	}
         	main.word = word;
         	main.getPhoto();
-
         };
 
     });
