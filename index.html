@@ -9,23 +9,22 @@
 </head>
 
 <body ng-controller="myCtrl as main">
-    <form id="search" ng-submit="main.submitForm(tag)">
-        <div id="start">
+    <div id="start">
+        <form id="search" ng-submit="main.searchPhoto(main.tag)">
             <h1>Flickr Searcher</h1>
             <input type="text" placeholder="enter a tag to search for" ng-model="main.tag" required>
-            <input type="submit" name="submit" value="Search!">
-        </div>
-    </form>
-    <div id="message" ng-show>
-    	<!-- <p>Looking for pictures with the {{main.tag}} tag</p> -->
+            <input type="submit" value="Search!">
+        </form>
     </div>
-    <div id="results">
-        <div class="photos" ng-show>
-            <!--How many imgs found, photos-->
-        </div>
-        <div class="error" ng-show>
-            <!-- no img found -->
-            <!-- flickr api error msg -->
+    <div id="messages">
+        <p ng-if="valid && !results && !error">Looking for pictures with the {{main.tag}} tag</p>
+        <p ng-if="error && !valid">No pictures with the {{main.tag}} tag found :(</p>
+        <p ng-if="valid && error">Uh oh, seems there's a problem with the API!</p>
+    </div>
+    <div id="results" ng-if="main.results">
+        <div class="photos" ng-repeat="result in results">
+            <p ng-if="valid && results">There are {{result.total}} results for {{main.tag}}</p>
+            <img ng-src="https://farm{{result.farm}}.staticflickr.com/{{result.server}}/{{result.id}}_{{result.secret}}.jpg">
         </div>
     </div>
     <script src="node_modules/jquery/dist/jquery.js"></script>

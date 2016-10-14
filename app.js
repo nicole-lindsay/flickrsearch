@@ -1,17 +1,45 @@
 angular.module('myApp', ['ngAnimate'])
-	.controller('myCtrl', function(){
-		var main = this;
-		main.tag = "";
-		main.submitted = false;
-		main.searchMsg = false;
-		main.imgMsg = "";
-		main.apiMsg = "";
+    .controller('myCtrl', function($http) {
+        var main = this;
+        main.tag = "";
+        main.valid = false;
+        main.error = false;
 
-		main.submitForm = function(tag){
-			console.log("something");
-			main.submitted = true;
-			main.searchMsg = true;
-			main.tag = "";
-		}
+        main.getPhoto = function() {
+            var url = "https://api.flickr.com/services/rest";
+            var params = {
+                method: 'flickr.photos.search',
+                api_key: '86ea026a9ba3960e6eb98657b7ea5cb9',
+                tags: main.tag,
+                format: 'json',
+                nojsoncallback: 1
+            };
 
-	});
+            $http({
+            	method: 'GET',
+            	url: url,
+            	params: params
+            })
+            .then(function(response){
+            	main.results = response.data.photos;
+            	main.error = false;
+            	console.log(main.results);
+            },
+            function(response){
+            	main.error = true;
+            });
+        };
+
+        main.searchPhoto = function(word){
+        	if(word){
+        		main.valid = true;
+        	} else {
+        		main.valid = false;
+        		return;
+        	}
+        	main.word = word;
+        	main.getPhoto();
+
+        };
+
+    });
