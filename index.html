@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 
 <head>
     <meta charset="UTF-8">
@@ -9,16 +9,15 @@
 </head>
 
 <body ng-controller="myCtrl as main">
-    <form id="search" ng-submit="main.submitForm()">
+    <form id="search" ng-submit="main.submitForm(tag)">
         <div id="start">
             <h1>Flickr Searcher</h1>
-            <input type="text" placeholder="enter a tag to search for" ng-model="main.tag" ng-min="1" ng-max="20" required>
+            <input type="text" placeholder="enter a tag to search for" ng-model="main.tag" required>
             <input type="submit" name="submit" value="Search!">
-            <button class="reset" ng-click="main.reset()">Start Over</button>
         </div>
     </form>
     <div id="message" ng-show>
-    	<!-- searching for {{main.tag}} -->
+    	<!-- <p>Looking for pictures with the {{main.tag}} tag</p> -->
     </div>
     <div id="results">
         <div class="photos" ng-show>
@@ -29,9 +28,10 @@
             <!-- flickr api error msg -->
         </div>
     </div>
-    <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"></script>
-    <script type="text/javascript" src="app.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
