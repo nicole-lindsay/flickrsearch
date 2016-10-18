@@ -2,6 +2,31 @@ body, .picsearch, #prev, #next {
 	font-family: 'Handlee', cursive;
 }
 
+body {
+	animation: colorchange 5s ease infinite;
+}
+
+@keyframes colorchange {
+	0% {
+		background-color: #e5e1d7;
+	}
+	20% {
+		background-color: #dedad1;
+	}
+	40% {
+		background-color: #dfdbd6;
+	}
+	60% {
+		background-color: #e1dcdb;
+	}
+	80% {
+		background-color: #d2cfb7;
+	}
+	100% {
+		background-color: #d6ccbb;
+	}
+}
+
 h1 {
 	font-size: 4em;
 }
@@ -29,4 +54,13 @@ h1 {
 	justify-content: space-between;
 	margin-left: 15em;
 	margin-right: 15em;
+}
+
+img {
+	height: 9.375em;
+	transition: 1s;
+}
+
+img:hover {
+	height: 15em;
 }
