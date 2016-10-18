@@ -64,3 +64,8 @@ img {
 img:hover {
 	height: 15em;
 }
+
+#prev, #next {
+	line-height: 2em;
+	width: 5em;
+}

@@ -8,13 +8,14 @@ angular.module('myApp', ['ngAnimate'])
         main.foundPhotos = false;
         main.results = [];
 
-        main.getPhoto = function() {
+        main.getPhoto = function(tag, page) {
             var url = "https://api.flickr.com/services/rest";
             var params = {
                 method: 'flickr.photos.search',
                 api_key: '86ea026a9ba3960e6eb98657b7ea5cb9',
-                tags: main.tag,
+                tags: tag,
                 format: 'json',
+                page: page || 1,
                 nojsoncallback: 1
             };
 
@@ -27,17 +28,16 @@ angular.module('myApp', ['ngAnimate'])
                         main.foundPhotos = true;
                         main.results = response.data.photos;
                         main.error = false;
-                        var placeholder = main.tag;
-                        main.tag = "";
+                        var placeholder = tag;
                         main.placeholder = placeholder;
-                        main.results.page = 1;
                     },
                     function(response) {
+                        console.log("error");
                         main.error = true;
                     });
         };
 
-        main.searchPhoto = function(word) {
+        main.searchPhoto = function(word, page) {
             if (word) {
                 main.valid = true;
             } else {
@@ -45,18 +45,16 @@ angular.module('myApp', ['ngAnimate'])
                 return;
             }
             main.word = word;
-            main.results.page = 1;
-            main.getPhoto();
+            main.getPhoto(word, page);
         };
 
         main.back = function() {
             main.results.page -= 1;
-            main.searchPhoto();
+            main.searchPhoto(main.word, main.results.page);
         };
 
         main.forward = function() {
             main.results.page += 1;
-            main.searchPhoto();
-            console.log(main.results);
+            main.searchPhoto(main.word, main.results.page);
         };
     });
